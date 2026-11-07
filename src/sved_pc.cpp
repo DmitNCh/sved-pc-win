@@ -204,7 +204,7 @@ void DrawSvedSphere(HDC hdc, RECT rcSphere) {
     g.DrawString(centerTitle.c_str(), -1, &titleFont, PointF((REAL)(cx - 155), (REAL)(cy - 8)), &centerBrush);
 
     Graphics screenG(hdc);
-    screenG.DrawImage(&backBuffer, rcSphere.left, rcSphere.top);
+    screenG.DrawImage(&backBuffer, (INT)rcSphere.left, (INT)rcSphere.top);
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
