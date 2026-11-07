@@ -1,0 +1,21 @@
+name: Сборка СВЕД-ПК для Windows (.EXE)
+on: [push, workflow_dispatch]
+jobs:
+  build-exe:
+    runs-on: windows-latest
+    steps:
+      - name: Получение исходного кода
+        uses: actions/checkout@v4
+
+      - name: Компиляция автономного SVED_PC_v3.exe (без внешних зависимостей)
+        shell: cmd
+        run: |
+          g++ -O2 src/sved_pc.cpp -o SVED_PC_v3.exe -lgdi32 -lgdiplus -lcomdlg32 -luser32 -lkernel32 -mwindows -static -static-libgcc -static-libstdc++
+
+      - name: Упаковка готового .EXE вместе с папкой русских скриптов
+        uses: actions/upload-artifact@v4
+        with:
+          name: SVED-PC-v3.0-Windows-Portable
+          path: |
+            SVED_PC_v3.exe
+            scripts/
